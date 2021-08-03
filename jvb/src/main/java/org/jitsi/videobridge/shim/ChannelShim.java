@@ -408,6 +408,15 @@ public class ChannelShim
     }
 
     /**
+     * Sets the MID value for RTP streams of this channel.
+     * @param mid the identifier of the RTP stream.
+     */
+    public void setMediaId(String mid)
+    {
+        endpoint.setMediaId(mid);
+    }
+
+    /**
      * @return the list of sources that were signaled to this channel.
      */
     public Collection<SourcePacketExtension> getSources()

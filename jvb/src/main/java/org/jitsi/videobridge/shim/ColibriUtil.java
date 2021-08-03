@@ -20,6 +20,7 @@ import org.jitsi.utils.logging2.*;
 import org.jitsi.videobridge.*;
 import org.jitsi.videobridge.sctp.*;
 import org.jitsi.xmpp.extensions.colibri.*;
+import org.jitsi.xmpp.extensions.jingle.*;
 import org.jivesoftware.smack.packet.*;
 
 import java.util.*;
@@ -132,7 +133,17 @@ public class ColibriUtil
                 continue;
             }
 
-
+            MediaIDExtension mid = channelIq.getMediaId();
+            if (mid == null)
+            {
+                logger.error("!!!!!!!!!!!!!!!!! Missing MEDIAID !!!!!!!!!!!!!!!!!!!!");
+                throw new IqProcessingException(XMPPError.Condition.bad_request, "Missing MediaId");
+            }
+            else {
+                String mediaId = mid.getID();
+                channelShim.setMediaId(mediaId);
+                logger.error("!!!!!!!!!!!!!!!!!!!!! Sucessfully set MEDIAID !!!!!!!!!!!!!!!");
+            }
             channelShim.setDirection(channelIq.getDirection());
             channelShim.addPayloadTypes(channelIq.getPayloadTypes());
             channelShim.addRtpHeaderExtensions(channelIq.getRtpHeaderExtensions());
