@@ -416,6 +416,11 @@ public class ChannelShim
         endpoint.setMediaId(mid);
     }
 
+    public String getMediaId()
+    {
+        return endpoint.getMediaId();
+    }
+
     /**
      * @return the list of sources that were signaled to this channel.
      */

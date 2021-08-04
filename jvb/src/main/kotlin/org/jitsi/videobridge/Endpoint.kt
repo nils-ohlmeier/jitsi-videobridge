@@ -424,6 +424,10 @@ class Endpoint @JvmOverloads constructor(
         transceiver.setMediaId(mid)
     }
 
+    fun getMediaId(): String {
+        return transceiver.getMediaId();
+    }
+
     override fun isSendingAudio(): Boolean {
         // The endpoint is sending audio if we (the transceiver) are receiving audio.
         return transceiver.isReceivingAudio()
