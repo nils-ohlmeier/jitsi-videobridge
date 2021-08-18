@@ -34,6 +34,7 @@ import org.jitsi.nlj.stats.PacketDelayStats
 import org.jitsi.nlj.transform.node.ConsumerNode
 import org.jitsi.nlj.util.Bandwidth
 import org.jitsi.nlj.util.LocalSsrcAssociation
+import org.jitsi.nlj.util.MidAssociation
 import org.jitsi.nlj.util.NEVER
 import org.jitsi.nlj.util.PacketInfoQueue
 import org.jitsi.nlj.util.RemoteSsrcAssociation
@@ -420,12 +421,12 @@ class Endpoint @JvmOverloads constructor(
         }
     }
 
-    fun setMediaId(mid: String) {
-        transceiver.setMediaId(mid)
+    fun addMediaId(type: MediaType, mid: String) {
+        transceiver.addMediaId(type, mid)
     }
 
-    fun getMediaId(): String {
-        return transceiver.getMediaId();
+    fun addMidAssociation(mid: MidAssociation) {
+        transceiver.addMidAssociation(mid)
     }
 
     override fun isSendingAudio(): Boolean {

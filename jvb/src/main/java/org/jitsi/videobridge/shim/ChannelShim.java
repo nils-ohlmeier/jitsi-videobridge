@@ -18,6 +18,7 @@ package org.jitsi.videobridge.shim;
 import org.jetbrains.annotations.*;
 import org.jitsi.nlj.format.*;
 import org.jitsi.nlj.rtp.*;
+import org.jitsi.nlj.util.*;
 import org.jitsi.utils.MediaType;
 import org.jitsi.utils.logging2.*;
 import org.jitsi.videobridge.*;
@@ -269,6 +270,12 @@ public class ChannelShim
         this.sources = sources;
         sources.forEach(s -> {
             endpoint.addReceiveSsrc(s.getSSRC(), getMediaType());
+            String mediaid = s.getParameter("mediaid");
+            logger.error("????????????????? Source: " + s.getSSRC() + " mediaid: " + s.getParameter("mediaid") + " ???????????????");
+            if (!mediaid.isEmpty())
+            {
+                endpoint.addMidAssociation(new MidAssociation(mediaid, s.getSSRC()));
+            }
         });
     }
 
@@ -411,14 +418,9 @@ public class ChannelShim
      * Sets the MID value for RTP streams of this channel.
      * @param mid the identifier of the RTP stream.
      */
-    public void setMediaId(String mid)
+    public void addMediaId(String mid)
     {
-        endpoint.setMediaId(mid);
-    }
-
-    public String getMediaId()
-    {
-        return endpoint.getMediaId();
+        endpoint.addMediaId(getMediaType(), mid);
     }
 
     /**

@@ -134,28 +134,11 @@ public class ColibriUtil
             }
 
             MediaIDExtension mid = channelIq.getMediaId();
-            String oldMediaID = channelShim.getMediaId();
-            if (mid == null)
+            if (mid != null)
             {
-                if (oldMediaID.isEmpty())
-                {
-                    logger.error("!!!!!!!!!!!!!!!!! Missing MEDIAID, none set !!!!!!!!!!!!!!!!!!!!");
-                    throw new IqProcessingException(XMPPError.Condition.bad_request, "Missing MediaId");
-                }
-                else {
-                    logger.error("!!!!!!!!!!!!!!!!! No MEDIAID in request, but ID is already set to " + oldMediaID + " !!!!!!!!!!!!!!!!!!!!");
-                }
-            }
-            else {
                 String newMediaId = mid.getID();
-                if (oldMediaID.isEmpty())
-                {
-                    channelShim.setMediaId(newMediaId);
-                    logger.error("!!!!!!!!!!!!!!!!!!!!! Sucessfully set MEDIAID to " + newMediaId + " !!!!!!!!!!!!!!!");
-                }
-                else {
-                    logger.error("!!!!!!!!!!!!!!!!!!!!! MEDIAID is set to" + oldMediaID + ", received " + newMediaId + " !!!!!!!!!!!!!!!");
-                }
+                channelShim.addMediaId(newMediaId);
+                logger.error("!!!!!!!!!!!!!!!!!!!!! Sucessfully added signaling MEDIAID " + newMediaId + " !!!!!!!!!!!!!!!");
             }
             channelShim.setDirection(channelIq.getDirection());
             channelShim.addPayloadTypes(channelIq.getPayloadTypes());
