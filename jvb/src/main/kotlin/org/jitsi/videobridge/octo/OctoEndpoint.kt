@@ -22,6 +22,7 @@ import org.jitsi.nlj.PacketInfo
 import org.jitsi.nlj.TransceiverEventHandler
 import org.jitsi.nlj.format.PayloadType
 import org.jitsi.nlj.rtp.RtpExtension
+import org.jitsi.nlj.util.MidAssociation
 import org.jitsi.utils.MediaType
 import org.jitsi.utils.logging2.Logger
 import org.jitsi.videobridge.AbstractEndpoint
@@ -145,6 +146,9 @@ class OctoEndpoint(
         transceiver.setReceiveSsrcs(ssrcsByMediaType)
     }
 
+    override fun addMidAssociation(mid: MidAssociation?) {
+        TODO("Not yet implemented")
+    }
     // The endpoint is sending audio if our Receiver object is receiving audio from the endpoint.
     override fun isSendingAudio(): Boolean = transceiver.isReceivingAudio
 

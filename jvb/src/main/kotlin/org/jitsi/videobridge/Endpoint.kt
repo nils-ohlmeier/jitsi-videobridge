@@ -425,7 +425,7 @@ class Endpoint @JvmOverloads constructor(
         transceiver.addMediaId(type, mid)
     }
 
-    fun addMidAssociation(mid: MidAssociation) {
+    override fun addMidAssociation(mid: MidAssociation) {
         transceiver.addMidAssociation(mid)
     }
 

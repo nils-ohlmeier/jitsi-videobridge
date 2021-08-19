@@ -156,6 +156,8 @@ public abstract class AbstractEndpoint
      */
     public abstract void addReceiveSsrc(long ssrc, MediaType mediaType);
 
+    public abstract void addMidAssociation(MidAssociation mid);
+
     /**
      * @return the {@link AbstractEndpointMessageTransport} associated with
      * this endpoint.

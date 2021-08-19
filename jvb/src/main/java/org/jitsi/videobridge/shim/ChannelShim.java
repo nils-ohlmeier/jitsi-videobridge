@@ -274,7 +274,12 @@ public class ChannelShim
             logger.error("????????????????? Source: " + s.getSSRC() + " mediaid: " + s.getParameter("mediaid") + " ???????????????");
             if (!mediaid.isEmpty())
             {
-                endpoint.addMidAssociation(new MidAssociation(mediaid, s.getSSRC()));
+                MidAssociation midA = new MidAssociation(mediaid, s.getSSRC());
+                endpoint.addMidAssociation(midA);
+                List<AbstractEndpoint> endpoints = getEndpoints();
+                for (AbstractEndpoint otherEndpoint : endpoints) {
+                    otherEndpoint.addMidAssociation(midA);
+                }
             }
         });
     }
@@ -445,6 +450,11 @@ public class ChannelShim
     Endpoint getEndpoint()
     {
         return endpoint;
+    }
+
+    List<AbstractEndpoint> getEndpoints()
+    {
+        return this.contentShim.getConference().getEndpoints();
     }
 
     /**

@@ -435,4 +435,9 @@ public class ContentShim
     {
         channels.remove(channelShim.getId());
     }
+
+    public Conference getConference()
+    {
+        return conference;
+    }
 }
